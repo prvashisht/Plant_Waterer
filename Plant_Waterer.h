@@ -17,17 +17,22 @@ public:
   int get_analog_value();
 
 private:
+  // constants
   static const byte DEFAULT_DRY_LIMIT = 30;
   static const int DEFAULT_WATERING_DURATION = 30;
   int MOISTURE_0 = 4095;
   int MOISTURE_100 = 2350;
+  // pins
   byte _sensor_pin;
   byte _motor_pin;
+  // internal variables
   byte _dry_limit = DEFAULT_DRY_LIMIT;
   int _watering_duration = DEFAULT_WATERING_DURATION;
   unsigned long _motor_start_millis = 0;
+  unsigned long _motor_stop_millis = millis();
   unsigned long _moisture_check_millis = 0;
   int _motor_state = LOW;
+  // functions
   void _turn_on_motor(int duration = DEFAULT_WATERING_DURATION);
   void _turn_off_motor();
 };

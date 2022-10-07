@@ -42,10 +42,14 @@ void Plant_Waterer::check_dryness_and_water() {
     else turn_off_motor();
 }
 void Plant_Waterer::_turn_on_motor(int duration) {
-    digitalWrite(_motor_pin, HIGH);
+    _motor_state = HIGH;
+    _motor_start_millis = millis();
+    digitalWrite(_motor_pin, _motor_state);
 }
-void Plant_Waterer::_turn_off_motor(){
-    digitalWrite(_motor_pin, LOW);
+void Plant_Waterer::_turn_off_motor() {
+    _motor_state = LOW;
+    _motor_stop_millis = millis();
+    digitalWrite(_motor_pin, _motor_state);
 }
 void Plant_Waterer::set_watering_duration(int duration) {
     _watering_duration = duration;
