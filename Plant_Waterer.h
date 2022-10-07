@@ -25,8 +25,11 @@ private:
   byte _motor_pin;
   byte _dry_limit = DEFAULT_DRY_LIMIT;
   int _watering_duration = DEFAULT_WATERING_DURATION;
-  void turn_on_motor(int duration = DEFAULT_WATERING_DURATION);
-  void turn_off_motor();
+  unsigned long _motor_start_millis = 0;
+  unsigned long _moisture_check_millis = 0;
+  int _motor_state = LOW;
+  void _turn_on_motor(int duration = DEFAULT_WATERING_DURATION);
+  void _turn_off_motor();
 };
 
 #endif
