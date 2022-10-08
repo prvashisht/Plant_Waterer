@@ -36,12 +36,15 @@ int Plant_Waterer::get_analog_value() {
 // TODO: add option for motor duration
 // TODO: add waiting time before checking dryness
 void Plant_Waterer::check_dryness_and_water() {
-    byte moisture_level = get_moisture_level();
+    if (millis() - _moisture_check_millis > _check_delay) {
+        _moisture_check_millis = millis();
+        byte moisture_level = get_moisture_level();
 
-    if (moisture_level < _dry_limit) turn_on_motor();
-    else turn_off_motor();
+        if (moisture_level < _dry_limit) turn_on_motor();
+        else turn_off_motor();
+    }
 }
-void Plant_Waterer::_turn_on_motor(int duration) {
+void Plant_Waterer::_turn_on_motor() {
     _motor_state = HIGH;
     _motor_start_millis = millis();
     digitalWrite(_motor_pin, _motor_state);
