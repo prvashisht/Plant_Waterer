@@ -40,17 +40,17 @@ void Plant_Waterer::check_dryness_and_water() {
         _moisture_check_millis = millis();
         byte moisture_level = get_moisture_level();
 
-        if (moisture_level < _dry_limit) turn_on_motor();
-        else turn_off_motor();
+        if (moisture_level < _dry_limit) _turn_on_motor();
+        else _turn_off_motor();
     }
 }
 void Plant_Waterer::_turn_on_motor() {
-    _motor_state = HIGH;
+    _motor_state = LOW;
     _motor_start_millis = millis();
     digitalWrite(_motor_pin, _motor_state);
 }
 void Plant_Waterer::_turn_off_motor() {
-    _motor_state = LOW;
+    _motor_state = HIGH;
     _motor_stop_millis = millis();
     digitalWrite(_motor_pin, _motor_state);
 }
